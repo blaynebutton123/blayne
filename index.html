@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Draggable Boxes</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <style>
+
+        
+
+
+
+
+
+
+
+        
+        
+
+
+        </style>
+
+    </head>
+
+    <body>
+        
+        <div class="header">
+          <div class="logo"><a href="../FINAL/index.html">BLAYNE</a></div>
+          <div class="nav">
+            <a href="#work">WRK</a> · <a href="#resume">XP</a> · <a href="#contact">CNNCT</a>
+          </div>
+        </div>
+
+        <div class="workspace" id="workspace">
+        </div>
+
+        <div className="hero">
+          <div class="draggable-box box1" style="top: 250px; left: 500px;"></div>
+          <div class="draggable-box box2" style="top: 150px; left: 730px;"></div>
+          <div class="draggable-box box3" style="top: 100px; left: 600px;"></div>
+          <div class="draggable-box box4" style="top: 250px; left: 800px;"></div>
+          <div class="box5"></div>
+          <div class="draggable-box box6" style="top: 200px; left: 380px;"></div>
+          
+        </div>
+
+        <div class="text">
+          <div class="bigtext">This is a simple decision</div>
+          <div class="smalltext">Simply the best.</div>
+          <a href="#work"><div class="button">VIEW WRK</div></a>
+        </div>
+
+
+
+        <script>
+            // Get all draggable boxes
+            const boxes = document.querySelectorAll('.draggable-box');
+        
+            // Variables to track drag state
+            let activeBox = null;
+            let currentX = 0;
+            let currentY = 0;
+            let initialX = 0;
+            let initialY = 0;
+            let offsetX = 0;
+            let offsetY = 0;
+
+            // Add event listeners to each box
+            boxes.forEach(box => {
+                box.addEventListener('mousedown', dragStart);
+            });
+
+            // Add document-level listeners for drag and drop
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            function dragStart(e) {
+                // Store which box is being dragged
+                activeBox = e.currentTarget;
+            
+                // Get the initial position
+                const rect = activeBox.getBoundingClientRect();
+                const workspaceRect = document.getElementById('workspace').getBoundingClientRect();
+            
+                // Calculate offset from mouse to box top-left
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+            
+                // Store initial mouse position
+                initialX = e.clientX - offsetX;
+                initialY = e.clientY - offsetY;
+            
+                // Add dragging class for visual feedback
+                activeBox.classList.add('dragging');
+            }
+
+            function drag(e) {
+                if (activeBox) {
+                    e.preventDefault();
+                
+                    // Calculate new position
+                    const workspaceRect = document.getElementById('workspace').getBoundingClientRect();
+                
+                    currentX = e.clientX - workspaceRect.left - offsetX;
+                    currentY = e.clientY - workspaceRect.top - offsetY;
+                
+                    // Keep box within workspace bounds
+                    const maxX = workspaceRect.width - activeBox.offsetWidth;
+                    const maxY = workspaceRect.height - activeBox.offsetHeight;
+                
+                    currentX = Math.max(0, Math.min(currentX, maxX));
+                    currentY = Math.max(0, Math.min(currentY, maxY));
+                
+                    // Update box position
+                    activeBox.style.left = currentX + 'px';
+                    activeBox.style.top = currentY + 'px';
+                }
+            }
+
+            function dragEnd(e) {
+                if (activeBox) {
+                    // Remove dragging class
+                    activeBox.classList.remove('dragging');
+                    activeBox = null;
+                }
+            }
+        </script>
+        
+        </div>
+
+        <div class="ticker">
+          <div class="ticker-content">
+            <span>NEW: Motion Graphics Projects · </span>
+            <span>Award-Winning Designs · </span>
+            <span>Available for Freelance · </span>
+            <span>Creative Direction · </span>
+            <span>UI/UX Expertise · </span>
+            <span>NEW: Motion Graphics Projects · </span>
+            <span>Award-Winning Designs · </span>
+            <span>Available for Freelance · </span>
+          </div>
+        </div>
+
+        <div class="portfolio">
+        <div class="portfolio" id="work">
+            <div class="titletext">WRK</div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item1">
+                    <a href="../FINAL/ViewershipExpansion.html">
+                    <div class="label">Viewership Expansion</div></a>
+                </div>
+                
+
+                
+                <div class="portfolio-item2">
+                    <a href="../FINAL/Print.html">
+                    <div class="label">Print</div></a>
+                </div>
+                
+
+                <div class="portfolio-item3">
+                    <a href="../FINAL/FineArt.html">
+                    <div class="label">Fine Arts</div></a>
+                </div>
+
+                <div class="portfolio-item4">
+                    <a href="../FINAL/Apparel.html">
+                    <div class="label">Apparel</div></a>
+                </div>
+
+                <div class="portfolio-item5">
+                    <a href="../FINAL/SocialMedia.html">
+                    <div class="label">Social Media</div></a>
+                </div>
+
+                <div class="portfolio-item6">
+                    <a href="../FINAL/MotionGraphics.html">
+                    <div class="label">Motion Graphics</div></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        <div class="experience">
+        <div class="experience" id="resume">
+            <div class="section-title">XP</div>
+            <div class="experience-list">
+                <div class="experience-item">
+                    <div class="experience-title">Freelance</div>
+                    <div class="experience-company">ProFxTrades, Seraf, ToastyFL, Etc. · 2024 — Present</div>
+                    <div class="experience-description">
+                        For the past year and a half, I’ve been freelancing full-time, designing for multiple clients across web, brand, and marketing. From startups to local businesses, I’ve helped teams sharpen their visuals, improve conversions, and bring their ideas to life with clean, high-impact design.
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title">Graphic Design Manager</div>
+                    <div class="experience-company">RossCreations · 2022 — 2024</div>
+                    <div class="experience-description">
+                        Managed all graphic design and artistic production. Created thumbnails for YouTube, website thumbnails, participated in photography, handled print, and spearheaded merchandise design. Organized team projects.
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title">Junior Graphic Designer</div>
+                    <div class="experience-company">Manatee Apparel · 2020 — 2022</div>
+                    <div class="experience-description">
+                        Developed, designed, laid out, and produced a variety of technical illustrations for garments, banners, and signs. Presented mockups to customers and made sufficient revisions. Generated vector logos and consistent branding for clothing. Submitted design ideas to plan projects with customers and managers.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact">
+        <div class="contact" id="contact">
+            <div class="contact-container">
+                <div class="contact-title">CNNCT</div>
+                <div class="contact-subtitle">
+                Available for freelance projects and collaborations. Let's create something simply great together.
+                </div>
+                
+                <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-label">EMAIL</div>
+                    <div class="contact-value">hello@blayner.com</div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-label">PHONE</div>
+                    <div class="contact-value">+1 (123) 456-7891</div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-label">LOCATION</div>
+                    <div class="contact-value">Tampa, FL</div>
+                </div>
+                </div>
+
+                <a href="mailto:buttonblayne@gmail.com"><div class="button">CONNECT</div></a>
+
+            </div>
+        </div>
+
+
+        <div class="footer">
+          <div class="footer-content">
+            <div class="footer-left">
+              © 2025 Blayne. All rights reserved.
+            </div>
+            <div class="footer-right">
+                <a href="#work" class="footer-link">WRK</a>
+                <a href="#resume" class="footer-link">XP</a>
+                <a href="#contact" class="footer-link">CNNCT</a>
+            </div>
+        </div>
+
+        
+
+    </body>
+
+</html>
